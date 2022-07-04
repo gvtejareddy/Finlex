@@ -49,11 +49,11 @@ Full list of available REST endpoints could be found in Swagger UI,
 which could be called using link: **http://127.0.0.1:8080/api/swagger-ui.html**
 
 
-#### German Phones Parser In Memory Database (H2 DataBase)
+#### Order Management Application In Memory Database (H2 DataBase)
 
 http://l127.0.0.1:8080/h2-console/login.jsp
 
-#### German Phones Parser UI (Frontend)
+#### Order Management Application UI (Frontend)
 
 It can be entered using link: **http://127.0.0.1:4200/**
 
