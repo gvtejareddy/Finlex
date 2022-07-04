@@ -1,0 +1,37 @@
+# Docker Compose file Reference (https://docs.docker.com/compose/compose-file/)
+version: '3'
+
+#Define services
+services:
+
+  
+
+  #Back-end Spring Boot Application
+  orderapp:
+    #The docker file in scrum-app build the jar and provides the docker image with the following name.
+    build: ./orderapp
+    container_name: orderapp
+    networks: # Networks to join (Services on the same network can communicate with each other using their name)
+      - backend
+      - frontend
+
+    #Environment variables for Spring Boot Application.
+    ports:
+      - 8080:8080 # Forward the exposed port 8080 on the container to port 8080 on the host machine
+
+
+  #Fron-end Angular Application
+  orderapp-ui:
+    build: ./orderapp-ui
+    container_name: orderapp-ui
+    ports:
+      - 4200:80
+    networks:
+      - frontend  
+    links:
+      - orderapp
+
+networks:
+  backend:
+  frontend:     
+
