@@ -1,6 +1,6 @@
 ## Order Management  Application
 
- This project is an implementation of German Phones Parser Application  and made of 2 separate Docker containers that holds:
+ This project is an implementation of Order Management Application  and made of 2 separate Docker containers that holds:
 
 - Java backend (Spring Boot v2.7.1)
     - H2 Database ( In Memory )
