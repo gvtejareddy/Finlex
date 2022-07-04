@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-6"><i class="bi bi-people-fill float-start" style="font-size:2rem" (click)="showUsers()"></i></div>
+    <div class="col-6"><i class="bi bi-plus-circle-fill float-end" style="font-size:2rem" (click)="addOrder()"></i>
+    </div>
+</div>
+<div class="row py-2">
+    <div class="col-12">
+    <div class="ng-autocomplete">
+        <ng-autocomplete [data]="data|async"  [searchKeyword]="keyword" placeholder="Filter By Name" id="searchByName"
+            (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)'
+            [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+        </ng-autocomplete>
+
+        <ng-template #itemTemplate let-item>
+            <a [attr.id]="item.name | trim" [innerHTML]="item.name+' ('+item.email +')'"></a>
+        </ng-template>
+
+        <ng-template #notFoundTemplate let-notFound>
+            <div [innerHTML]="notFound"></div>
+        </ng-template>
+    </div>
+</div>
+</div>
+<div class="card mt-2">
+    <div class="card-header">
+        <h3>Orders</h3>
+    </div>
+
+    <table class="table table-striped" id="orderTable">
+        <thead>
+            <tr>
+                <th scope="col">Order ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Number of Products</th>
+                <th scope="col">Email</th>
+                <th scope="col">Total Price</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="(orders |  async)?.length>0">
+            <tr *ngFor="let order of orders | async">
+                <th scope="row">{{order.orderId}}</th>
+                <td>
+                    {{ order.orderedDate | date : 'medium'  }}
+                </td>
+                <td>{{order.productList.length}}</td>
+                <td>{{order.email}}</td>
+                <td>{{order.totalPrice|currency:"EUR":"symbol"}}</td>
+               
+               
+            </tr>
+            </tbody>
+            <tbody *ngIf="(orders |  async)?.length==0">
+            <tr >
+                <td  colspan="5">No Orders Found</td>
+            </tr>
+           
+        </tbody>
+        
+    </table>
+</div>

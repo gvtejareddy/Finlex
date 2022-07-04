@@ -1,0 +1,39 @@
+<form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+    <div class="mb-3">
+        <label for="name" class="form-label">Created By (Email ID )</label>
+        <ng-autocomplete [data]="data|async" [searchKeyword]="keyword" placeholder="Search By Name"
+        (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)'
+        [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+    </ng-autocomplete>
+    <ng-template #itemTemplate let-item>
+        <a [innerHTML]="item.name+' ('+item.email +')'"></a>
+    </ng-template>
+
+    <ng-template #notFoundTemplate let-notFound>
+        <div [innerHTML]="notFound"></div>
+    </ng-template>
+        <span class="text-danger">{{error.name}}</span>
+    </div>
+    <div class="mb-5">
+        <label for="name" class="form-label">Add Products</label>
+        <ng-select
+        [items]="products"
+        [multiple]="true"
+        bindLabel="productName"
+        [closeOnSelect]="false"
+        bindValue="productId"
+        [selectableGroup]="true"
+        [(ngModel)]="selectedProducts" formControlName="products">
+    </ng-select>
+    <span class="text-danger">{{error.product}}</span>
+    </div>
+   
+    <button type="submit" class="btn btn-primary mb-4" (click)="save()">Save</button>
+
+    <div *ngIf="showSuccess" class="alert alert-primary" role="alert">
+        {{alertMessage}}
+    </div>
+    <div *ngIf="showFailure"  class="alert alert-danger" role="alert">
+        {{alertMessage}}
+      </div>
+</form>
